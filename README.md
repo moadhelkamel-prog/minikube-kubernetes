@@ -451,7 +451,7 @@ Conclusion : sur ce poste, la voie VirtualBox **ne peut pas** tourner à vitesse
 
 ### Dépôt GitHub
 
-**https://github.com/moadhelkamel-prog/TP-minikube** (public)
+**https://github.com/moadhelkamel-prog/minikube-kubernetes** (public)
 
 ### Livrables sur le poste
 
