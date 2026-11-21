@@ -97,7 +97,6 @@ minikube version            # -> v1.39.0
 kubectl version --client    # -> v1.37.2
 ```
 
-![Etape 1 - Audit et installation des outils](screenshots/step1.png)
 
 ---
 
@@ -149,7 +148,6 @@ end
 
 Le driver `none` installe Kubernetes **directement dans la VM** (pas de VM imbriquée), ce qui est indispensable ici car la virtualisation imbriquée n'est pas disponible.
 
-![Etape 2 - Clone et analyse du Vagrantfile](screenshots/step2.png)
 
 ---
 
@@ -194,7 +192,6 @@ eazytraining/ubuntu2204 (virtualbox, 1.0)
 
 La VM, la box et le provisioning sont donc **prêts**, mais inexploitables en l'état : à cette vitesse, l'installation de Docker + Kubernetes + Minikube dans la VM prendrait plusieurs heures.
 
-![Etape 3 - vagrant up et blocage](screenshots/step3.png)
 
 ---
 
@@ -243,7 +240,6 @@ minikube start --driver=docker --memory=3000 --cpus=2
 * Done! kubectl is now configured to use "minikube" cluster
 ```
 
-![Etape 4 - Minikube sur Docker dans WSL2](screenshots/step4.png)
 
 > Remarque : WSL2 doit rester actif, sinon la distro (et donc le conteneur Minikube) s'arrête. Un process « keep-alive » est lancé par le script `minikube-wsl.ps1` livré avec ce compte rendu.
 
@@ -251,7 +247,6 @@ minikube start --driver=docker --memory=3000 --cpus=2
 
 ## 7. Résultats / preuves
 
-![Etape 5 - kubectl get nodes et test applicatif](screenshots/step5.png)
 
 ### 7.1 État du cluster
 
@@ -338,21 +333,14 @@ Kubernetes  v1.37.0  —  containerd 2.3.4
 
 ### 7.6 Captures d'écran réelles (PC de kmoua)
 
-Toutes les captures ci-dessous sont des **captures d'écran réelles** de ce poste (fenêtres PowerShell / Edge maximisées), montrant les commandes réellement tapées et leurs sorties réelles — pas des sorties retranscrites.
+Les captures d'écran réelles de ce poste (fenêtres PowerShell uniquement) sont dans le dossier `screenshots/` : `step1.png` … `step5.png` et `screenshot-powershell.png`. Elles montrent les commandes réellement tapées et leurs sorties réelles — pas des sorties retranscrites. Elles ne sont pas affichées ici pour garder le README lisible.
 
-![Etape 1 - Audit et installation des outils](screenshots/step1.png)
 
-![Etape 2 - Clone et analyse du Vagrantfile](screenshots/step2.png)
 
-![Etape 3 - vagrant up et blocage](screenshots/step3.png)
 
-![Etape 4 - Minikube sur Docker dans WSL2](screenshots/step4.png)
 
-![Etape 5 - kubectl get nodes et test applicatif](screenshots/step5.png)
 
-![Capture PowerShell - .\minikube-wsl.cmd status (PC de kmoua)](screenshots/screenshot-powershell.png)
 
-*Les fichiers `step*-cmd.ps1` sont les scripts PowerShell exactement exécutés pour produire chaque capture (preuve que les commandes ont réellement tourné sur ce poste).*
 
 ---
 
