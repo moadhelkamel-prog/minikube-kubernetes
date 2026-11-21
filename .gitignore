@@ -1,0 +1,15 @@
+# Temp / OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Vagrant
+.vagrant/
+*.box
+
+# VMs
+VirtualBox VMs/
+*.vmdk
+*.vdi
+*.vmcx
+*.vmrs

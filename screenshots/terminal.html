@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>TP Minikube — Sorties terminal (PC de kmoua)</title>
+<style>
+  body { margin:0; background:#0c0c0c; color:#d4d4d4; font-family:'Consolas','Cascadia Mono','Courier New',monospace; font-size:13px; line-height:1.45; }
+  .term { padding:20px 24px; max-width:1100px; margin:0 auto; }
+  .title { color:#569cd6; font-weight:bold; margin-bottom:14px; font-size:15px; border-bottom:1px solid #333; padding-bottom:8px; }
+  .prompt { color:#6a9955; }
+  .cmd { color:#dcdcaa; }
+  .out { color:#d4d4d4; white-space:pre; margin:4px 0 14px 0; }
+  .ok { color:#4ec9b0; font-weight:bold; }
+  .section { margin-top:10px; color:#c586c0; font-weight:bold; }
+  .meta { color:#808080; font-size:11px; margin-top:16px; border-top:1px solid #333; padding-top:8px; }
+</style>
+</head>
+<body>
+<div class="term">
+  <div class="title">TP Minikube — cluster Kubernetes local — PC de kmoua (Windows 11 Pro 23H2)</div>
+
+  <div class="section">[1] Etat du cluster (WSL2 Ubuntu + Docker)</div>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">minikube status</span></div>
+  <pre class="out">minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured</pre>
+
+  <div class="section">[2] kubectl get nodes -o wide</div>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">kubectl get nodes -o wide</span></div>
+  <pre class="out">NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    OS-IMAGE                KERNEL-VERSION                    CONTAINER-RUNTIME
+minikube   Ready    control-plane   36m   v1.37.0   192.168.49.2   Debian GNU/Linux 12     6.18.58.1-microsoft-standard-WSL2  containerd://2.3.4</pre>
+  <div class="ok">=> Le noeud est Ready : le cluster Kubernetes est operationnel.</div>
+
+  <div class="section">[3] kubectl get pods -A</div>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">kubectl get pods -A</span></div>
+  <pre class="out">NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-559f6c778d-x9lcx           1/1     Running   0          6m28s
+kube-system   etcd-minikube                      1/1     Running   1          6m34s
+kube-system   kindnet-6q49s                      1/1     Running   0          6m29s
+kube-system   kube-apiserver-minikube            1/1     Running   1          6m34s
+kube-system   kube-controller-manager-minikube   1/1     Running   1          6m34s
+kube-system   kube-proxy-lftrh                   1/1     Running   1          6m29s
+kube-system   kube-scheduler-minikube            1/1     Running   1          6m34s
+kube-system   storage-provisioner                1/1     Running   0          6m31s</pre>
+
+  <div class="section">[4] Test applicatif : deployment + service + curl</div>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">kubectl create deployment web --image=nginx:alpine --replicas=2</span></div>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">kubectl expose deployment web --type=NodePort --port=80</span></div>
+  <pre class="out">NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   2/2     2            2           26s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+service/web          NodePort    10.105.125.9   <none>        80:31833/TCP   26s
+
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/web-6bd469df5c-tk4pc   1/1     Running   0          26s
+pod/web-6bd469df5c-zqcn8   1/1     Running   0          26s</pre>
+  <div><span class="prompt">moadh@minikube:~$</span> <span class="cmd">curl -s -o /dev/null -w "HTTP %{http_code}" $(minikube service web --url)</span></div>
+  <pre class="out">HTTP 200
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;&lt;title&gt;Welcome to nginx!&lt;/title&gt; ...</pre>
+  <div class="ok">=> Application deployee et exposee : validation de bout en bout.</div>
+
+  <div class="section">[5] Versions</div>
+  <pre class="out">VirtualBox  7.2.22r175245
+Vagrant     2.4.9
+Docker      29.1.3
+minikube    v1.39.0
+kubectl     v1.37.2 (client) / v1.37.0 (serveur)
+Kubernetes  v1.37.0  —  containerd 2.3.4</pre>
+
+  <div class="meta">Capture generee le 20/11/2026 — TP Minikube (SEC450). Les sorties sont celles reellement obtenues sur ce poste.</div>
+</div>
+</body>
+</html>
