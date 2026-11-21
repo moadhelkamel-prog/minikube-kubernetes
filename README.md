@@ -411,6 +411,10 @@ Conclusion : sur ce poste, la voie VirtualBox **ne peut pas** tourner à vitesse
 4. **Montrer les journaux** dans `logs/` (`vagrant-up.log` prouve la tentative VirtualBox et son blocage).
 5. **Expliquer en une phrase** : « VirtualBox ne peut pas utiliser VT-x car Hyper-V/WSL2 est actif ; la VM tournait ~25× trop lentement, donc j'ai déployé le même cluster avec Minikube driver `docker` dans WSL2, qui donne exactement le même `kubectl get nodes` → Ready. »
 
+### Dépôt GitHub
+
+**https://github.com/moadhelkamel-prog/TP-minikube** (public)
+
 ### Livrables sur le poste
 
 | Fichier | Contenu |
