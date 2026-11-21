@@ -1,6 +1,56 @@
-# Compte rendu — TP : cluster Kubernetes local (VirtualBox + Vagrant + Minikube)
+# TP Minikube — Cluster Kubernetes local
+
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.37.0-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Minikube](https://img.shields.io/badge/Minikube-v1.39.0-326CE5?logo=kubernetes)](https://minikube.sigs.k8s.io/)
+[![Docker](https://img.shields.io/badge/Docker-29.1.3-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Vagrant](https://img.shields.io/badge/Vagrant-2.4.9-1868F2?logo=vagrant&logoColor=white)](https://www.vagrantup.com/)
+[![VirtualBox](https://img.shields.io/badge/VirtualBox-7.2.22-183A61?logo=virtualbox&logoColor=white)](https://www.virtualbox.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> **Compte rendu — TP SEC450 (Kubernetes / DevOps)**  
+> Déploiement d'un cluster Kubernetes mono-nœud en local, avec la chaîne VirtualBox + Vagrant + Minikube, puis bascule sur Minikube driver `docker` dans WSL2.
+
+## Table des matières
+
+- [1. Objectif](#1-objectif)
+- [2. Audit de l'état initial](#2-audit-de-létat-initial-du-poste)
+- [3. Installation des outils manquants](#3-installation-des-outils-manquants)
+- [4. Récupération du projet et analyse](#4-récupération-du-projet-et-analyse)
+- [5. Tentative `vagrant up` (voie VirtualBox)](#5-tentative-vagrant-up-voie-virtualbox--et-blocage)
+- [6. Solution retenue : Minikube sur Docker dans WSL2](#6-solution-retenue--minikube-sur-docker-dans-wsl2)
+- [7. Résultats / preuves](#7-résultats--preuves)
+- [8. Problèmes rencontrés et solutions](#8-problèmes-rencontrés-et-solutions)
+- [9. Comparaison des deux approches](#9-comparaison-des-deux-approches)
+- [10. Conclusion](#10-conclusion)
 
 **Cours :** SEC450 — Kubernetes / DevOps
+
+## Quick start
+
+```powershell
+# 1. Lancer le cluster (WSL2 + Docker)
+.\minikube-wsl.cmd start
+
+# 2. Vérifier
+.\minikube-wsl.cmd status
+.\minikube-wsl.cmd kubectl
+
+# 3. Démo complète pour le professeur
+.\demo-prof.cmd
+```
+
+## Structure du dépôt
+
+```
+TP-minikube/
+├── README.md                     # Ce compte rendu
+├── demo-prof.cmd / .ps1          # Démo automatique (pause entre chaque étape)
+├── minikube-wsl.cmd / .ps1       # Contrôle du cluster (start/status/kubectl/stop)
+├── screenshots/                  # Captures réelles (step1.png … step5.png)
+├── logs/                         # Journaux des tentatives
+└── vagrant/minikube/minikube_ubuntu22/
+    └── Vagrantfile               # Vagrantfile du TP (box eazytraining/ubuntu2204)
+```
 **Dépôt :** <https://github.com/diranetafen/cursus-devops.git> → dossier `vagrant/minikube`
 **Poste :** Windows 11 Pro 23H2 — Lenovo ideapad 80YL — 12 Go RAM — 4 vCPU — Hyper-V / WSL2 actifs
 **Date :** 20/11/2026
